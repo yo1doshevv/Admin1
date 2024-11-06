@@ -8,7 +8,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../modal/Modal"; 
 
-const Table = () => {
+const table = () => {
   const [catigories, setCatigories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
@@ -159,4 +159,4 @@ const Table = () => {
   );
 };
 
-export default Table;
+export default table;
