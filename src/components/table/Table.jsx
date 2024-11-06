@@ -3,28 +3,25 @@ import "./Table.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Loader from "../loader/Loader";
-import { Button, Modal, Modal as MUIModal } from "@mui/material"; 
+import { Button, Modal } from "@mui/material"; 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomModal from "../modal/Modal"; 
 
-const table = () => {
+const Table = () => {
   const [catigories, setCatigories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [modal, setModal] = useState(false);
 
-  const hendlModal = () => {
+  const handleModal = () => {
     setModal(prev => !prev);
   };
 
-
-  //EditModal
+  // EditModal
   const [edit, setEdit] = useState(false);
 
-
-
-  //GetCatigories
+  // Get Categories
   async function GetCatigories() {
     await axios
       .get("https://autoapi.dezinfeksiyatashkent.uz/api/categories")
@@ -40,7 +37,7 @@ const table = () => {
       });
   }
 
-  //DeletCatigories
+  // Delete Categories
   async function DeletedCatigories(id) {
     const token = localStorage.getItem("token");
     await axios
@@ -63,15 +60,15 @@ const table = () => {
     GetCatigories();
   }, []);
 
-  // Sahifadagi elementlar soni bo‘yicha qaysi elementlarni ko'rsatishni aniqlash
+  // Calculate items to display on the page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = catigories.slice(indexOfFirstItem, indexOfLastItem);
 
-  // Umumiy sahifalar sonini hisoblash
+  // Calculate total pages
   const totalPages = Math.ceil(catigories.length / itemsPerPage);
 
-  // Sahifalarni almashtirish funksiyalari
+  // Pagination handlers
   const goToNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -88,14 +85,10 @@ const table = () => {
     <div>
       <div className="header">
         <h1>Categories</h1>
-        <button onClick={hendlModal}>Add</button>
+        <button onClick={handleModal}>Add</button>
       </div>
 
-      {/* {modal && <CustomModal hendlModal={hendlModal} />}  */}
-
-      {modal ? < CustomModal hendlModal={hendlModal}/> : null}
-
-    
+      {modal && <CustomModal handleModal={handleModal}/>}
 
       <table>
         <thead>
@@ -143,7 +136,7 @@ const table = () => {
         </tbody>
       </table>
 
-      {/* Pagination tugmalari */}
+      {/* Pagination */}
       <div className="pagination">
         <button onClick={goToPreviousPage} disabled={currentPage === 1}>
           Oldingi
@@ -159,4 +152,4 @@ const table = () => {
   );
 };
 
-export default table;
+export default Table;
