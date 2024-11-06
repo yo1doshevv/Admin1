@@ -1,0 +1,12 @@
+.container__sidebar{
+    display: flex;
+}
+
+.catigories{
+    width: 89%;
+    padding: 20px;
+}
+
+.load{
+    width: 90% ;
+}

@@ -1,0 +1,57 @@
+.loader-container {
+    position: absolute;
+    width: 84.4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50vh;
+  }
+  
+  /* Loader dizayni */
+  .loader {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #e0e0e0;
+    border-top: 6px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: relative;
+  }
+  
+  /* Pulsatsiya effekti */
+  .loader::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(52, 152, 219, 0.3);
+    transform: translate(-50%, -50%);
+    animation: pulse 1.5s ease-out infinite;
+  }
+  
+  /* Aylanish animatsiyasi */
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Pulsatsiya animatsiyasi */
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0;
+    }
+  }
+  

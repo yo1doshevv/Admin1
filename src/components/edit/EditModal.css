@@ -1,0 +1,56 @@
+.edit-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Oq rangda orqa fon */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Modalni yuqori darajaga qo'yish */
+  }
+  
+  .edit-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+  }
+  
+  .edit-modal-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .edit-modal-content label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .edit-modal-content input[type="text"],
+  .edit-modal-content input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+  }
+  
+  .edit-modal-content .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .edit-modal-content button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #29742b;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .edit-modal-content button.close-btn {
+    background-color: #f44336;
+  }
+  

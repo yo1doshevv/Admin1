@@ -1,0 +1,33 @@
+/* Footer umumiy uslubi */
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Mualliflik huquqi matni */
+.footer-text {
+    font-size: 0.9rem;
+}
+
+/* Ijtimoiy tarmoqlar ro'yxati */
+.social-links {
+    display: flex;
+    list-style-type: none;
+    gap: 15px;
+}
+
+/* Ijtimoiy tarmoq havolalari uslubi */
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.social-links a:hover {
+    color: #aaa;
+}

@@ -1,0 +1,54 @@
+/* Sidebar konteyner */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Sarlavha */
+.sidebar h2 {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #fff;
+}
+
+/* Navigatsiya */
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.sidebar-nav a {
+    color: #ddd;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+}
+
+/* Aktiv link uchun uslub */
+.sidebar-nav .active-link {
+    background-color: #555;
+    color: #fff;
+}
+
+/* Linklar uchun hover effekti */
+.sidebar-nav a:hover {
+    background-color: #444;
+    color: #fff;
+}
+.active-link {
+    font-weight: bold;
+    color: #3498db; /* Faol link rangi */
+  }
+  

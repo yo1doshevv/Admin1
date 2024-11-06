@@ -1,0 +1,112 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    border: 1px solid #393939;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+  }
+
+  .header h1{
+    font-size: 25px;
+  }
+
+  .header button{
+    border: none;
+    padding: 10px 40px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+  }
+
+  th {
+    background-color: #383838;
+    color: white;
+  }
+
+  /* .btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  } */
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 80px;
+    height: 40px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .pagination button:hover:not(:disabled) {
+    background-color: #0056b3;
+    transform: scale(1.1);
+  }
+  
+  .pagination button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .pagination span {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 10px;
+  }
+  
+
+/* Loader joylashuvi */
+.loader-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10; /* Jadval ustida ko‘rsatish uchun yuqori qiymat */
+}
+
+/* Loader stili */
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #000000;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: relative;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
