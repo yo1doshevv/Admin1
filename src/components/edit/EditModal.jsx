@@ -30,7 +30,7 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
     const formDataToSend = new FormData();
     formDataToSend.append("name_en", formData.name_en);
     formDataToSend.append("name_ru", formData.name_ru);
-    if (formData.file) formDataToSend.append("file", formData.file);
+    if (formData.file) formDataToSend.append("images", formData.file);
 
     try {
       await axios.put(

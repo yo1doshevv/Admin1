@@ -32,7 +32,7 @@ const CustomModal = ({ hendlModal }) => {
     const formDataToSend = new FormData();
     formDataToSend.append("name_en", formData.name_en);
     formDataToSend.append("name_ru", formData.name_ru);
-    formDataToSend.append("file", formData.file);
+    formDataToSend.append("images", formData.file);
 
     axios
       .post(
