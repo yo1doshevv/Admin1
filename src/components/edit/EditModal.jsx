@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./EditModal.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 const EditModal = ({ editData, closeEditModal, getCategories }) => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,8 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
     name_ru: editData?.name_ru || "",
     file: null,
   });
+
+  const location = useLocation();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,9 +30,24 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
       return;
     }
 
-    const formDataToSend = new FormData();
-    formDataToSend.append("name_en", formData.name_en);
-    formDataToSend.append("name_ru", formData.name_ru);
+    switch (locations) {
+      case "/categories": {
+        formDataToSend.append("name_en", formData.name_en);
+        formDataToSend.append("name_ru", formData.name_ru);
+        formDataToSend.append("images", formData.file);
+        break; // break qo'yish kerak
+      }
+
+      case "/brands": {
+        formDataToSend.append("title", formData.name_en); // Russian (name_ru) kirish uchun variant qo'shishingiz mumkin
+        formDataToSend.append("images", formData.file);
+        break; // break qo'yish kerak
+      }
+
+      default:
+        break;
+    }
+
     if (formData.file) formDataToSend.append("images", formData.file);
 
     try {
@@ -57,7 +75,7 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
         <h2>Edit Data</h2>
         <form onSubmit={handleSubmit}>
           <label>
-            Name (English):
+       name
             <input
               type="text"
               name="name_en"
@@ -66,16 +84,18 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
               required
             />
           </label>
-          <label>
-            Name (Russian):
-            <input
-              type="text"
-              name="name_ru"
-              value={formData.name_ru}
-              onChange={handleChange}
-              required
-            />
-          </label>
+          {location === "/categories" ? (
+            <label>
+              Name (Russian):
+              <input
+                type="text"
+                name="name_ru"
+                value={formData.name_ru}
+                onChange={handleChange}
+                required
+              />
+            </label>
+          ) : location === "/brands" ? null : null}
           <label>
             Upload File:
             <input

@@ -15,9 +15,9 @@ const Table = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
   const [modal, setModal] = useState(false);
-  const [modalType, setModalType] = useState(null); // 'add' or 'edit'
+  const [modalType, setModalType] = useState(null); 
   const [brands, setBrands] = useState([]);
-  const locales = useLocation(); // useLocation to detect current path
+  const locales = useLocation(); 
 
   // Get Categories
   const GetCategories = async () => {
@@ -51,6 +51,8 @@ const Table = () => {
       toast.error("Xatolik yuz berdi");
     }
   };
+
+  
 
   // Fetch Brands (Not currently used)
   const getBrands = async () => {
@@ -182,7 +184,7 @@ const Table = () => {
                     />
                   </td>
                   <td className="btn">
-                    <Button
+                  <Button
                       variant="contained"
                       color="primary"
                       startIcon={<EditIcon />}
@@ -195,6 +197,7 @@ const Table = () => {
                       variant="outlined"
                       color="error"
                       startIcon={<DeleteIcon />}
+                      onClick={() => DeleteCategory(elem.id)}
                     ></Button>
                   </td>
                 </tr>

@@ -1,3 +1,4 @@
+/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -11,6 +12,7 @@
   z-index: 1000; /* Modalni yuqorida ko'rsatish uchun */
 }
 
+/* Modal Content */
 .modal-content {
   background: white;
   padding: 20px;
@@ -19,6 +21,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Title */
 h2 {
   margin-bottom: 20px;
   text-align: center;
@@ -26,6 +29,7 @@ h2 {
   color: #333;
 }
 
+/* Labels */
 label {
   display: block;
   margin-bottom: 10px;
@@ -33,6 +37,7 @@ label {
   color: #555;
 }
 
+/* Input Fields */
 input[type="text"],
 input[type="file"] {
   width: 100%;
@@ -50,12 +55,14 @@ input[type="file"]:focus {
   outline: none; /* Fokusda bo'lganda standart outline ni olib tashlash */
 }
 
+/* Button Container */
 .button-container {
   display: flex;
   justify-content: space-between; /* Tugmalarni o'zaro joylashtirish */
   margin-top: 20px; /* Tugmalar o'rtasida bo'sh joy */
 }
 
+/* General Button Styles */
 button {
   padding: 10px 15px;
   border: none;
@@ -72,6 +79,7 @@ button:hover {
   transform: scale(1.05); /* Tugma ustiga kelsa biroz kattalashadi */
 }
 
+/* Close Button */
 .close-btn {
   background-color: #f44336; /* Bekor qilish tugmasi uchun qizil rang */
 }
@@ -80,6 +88,7 @@ button:hover {
   background-color: #d32f2f; /* Bekor qilish tugmasi ustiga kelsa, rang o'zgaradi */
 }
 
+/* Disabled Button */
 button:disabled {
   background-color: #ccc; /* Disabled tugmalar uchun rang */
   cursor: not-allowed; /* Ko'rsatkichni o'zgartirish */
