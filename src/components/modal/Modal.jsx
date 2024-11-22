@@ -3,21 +3,30 @@ import axios from "axios";
 import { toast } from "react-toastify"; // Toast funksiyalarini import qilamiz
 import "./Modal.css";
 import { useLocation } from "react-router-dom";
+import Loader from "../loader/Loader";
 
 const CustomModal = ({ hendlModal }) => {
   const [formData, setFormData] = useState({
     name_en: "",
     name_ru: "",
     file: null,
+    name: "",
+    text: "",
+    model: "",
+    brand: "",
+    Category: "",
+    Color: "",
+    City: "",
   });
 
   const handleRefresh = () => {
     setTimeout(() => {
-      window.location.reload(); // Sahifani 5 soniyadan keyin yangilash
+      window.location.reload(); 
+      <Loader/>
     }, 5000); // 5000 millisekund, ya'ni 5 soniya
   };
 
-  const locations = useLocation().pathname;
+  const locations = useLocation()?.pathname;
   console.log(locations);
 
   const handleChange = (e) => {
@@ -36,17 +45,37 @@ const CustomModal = ({ hendlModal }) => {
 
     // `switch` operatori ichidagi `case` bloklarini to'g'ri yozish
     switch (locations) {
-      case '/categories': {
+      case "/categories": {
         formDataToSend.append("name_en", formData.name_en);
         formDataToSend.append("name_ru", formData.name_ru);
         formDataToSend.append("images", formData.file);
-        break; // break qo'yish kerak
+        break;
       }
 
       case "/brands": {
         formDataToSend.append("title", formData.name_en); // Russian (name_ru) kirish uchun variant qo'shishingiz mumkin
         formDataToSend.append("images", formData.file);
-        break; // break qo'yish kerak
+        break;
+      }
+
+      case "/locations": {
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("text", formData.text);
+        formDataToSend.append("images", formData.file);
+        break;
+      }
+
+      case "/cities": {
+        formDataToSend.append("name", formData.name);
+        formDataToSend.append("text", formData.text);
+        formDataToSend.append("images", formData.file);
+        break;
+      }
+
+      case "/models": {
+        formDataToSend.append("model", formData.model);
+        formDataToSend.append("brand", formData.brand);
+        break;
       }
 
       default:
@@ -87,28 +116,182 @@ const CustomModal = ({ hendlModal }) => {
       <div className="modal-content">
         <h2>Add New Data</h2>
         <form onSubmit={handleSubmit}>
-          <label>
-            Name (English):
-            <input
-              type="text"
-              name="name_en"
-              value={formData.name_en}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          {locations === "/categories" && (
-            <label>
-              Name (Russian):
-              <input
-                type="text"
-                name="name_ru"
-                value={formData.name_ru}
-                onChange={handleChange}
-                required
-              />
-            </label>
-          )}
+          {locations === "/locations" || locations === "/cities" ? (
+            <>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                Text:
+                <input
+                  type="text"
+                  name="text"
+                  value={formData.text}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/categories" ? (
+            <>
+              <label>
+                Name (English):
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                Name (Russian):
+                <input
+                  type="text"
+                  name="name_ru"
+                  value={formData.name_ru}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/models" ? (
+            <>
+              <label>
+                Model:
+                <input
+                  type="text"
+                  name="model"
+                  value={formData.model}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                Brand:
+                <input
+                  type="text"
+                  name="brand"
+                  value={formData.brand}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/brands" ? (
+            <>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/brands" ? (
+            <>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/brands" ? (
+            <>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/brands" ? (
+            <>
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name_en"
+                  value={formData.name_en}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : locations === "/cars" ? (
+            <>
+              <label>
+                brand:
+                <input
+                  type="text"
+                  name="brand"
+                  value={formData.brand}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                model:
+                <input
+                  type="text"
+                  name="model"
+                  value={formData.model}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                categoriy:
+                <input
+                  type="text"
+                  name="categoriy"
+                  value={formData.Category}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                color:
+                <input
+                  type="text"
+                  name="color"
+                  value={formData.Color}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+              <label>
+                city:
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.City}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
+            </>
+          ) : null}
+
           <label>
             Upload File:
             <input
@@ -119,10 +302,9 @@ const CustomModal = ({ hendlModal }) => {
               required
             />
           </label>
+
           <div className="button-container">
-            <button type="submit">
-              Add
-            </button>
+            <button type="submit" onClick={handleRefresh}>Add</button>
             <button type="button" onClick={hendlModal} className="close-btn">
               Cancel
             </button>

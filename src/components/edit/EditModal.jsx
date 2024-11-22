@@ -4,14 +4,15 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 
-const EditModal = ({ editData, closeEditModal, getCategories }) => {
+const EditModal = ({ categories, closeEditModal, getCategories, id }) => {
   const [formData, setFormData] = useState({
-    name_en: editData?.name_en || "",
-    name_ru: editData?.name_ru || "",
+    name_en: categories?.name_en || "",
+    name_ru: categories?.name_ru || "",
     file: null,
   });
 
   const location = useLocation();
+  console.log(location); // Debugging purpose, ensure location object is correctly obtained
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,35 +25,46 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const token = localStorage.getItem("token");
     if (!token) {
       toast.error("Authorization required.");
       return;
     }
 
-    switch (locations) {
+    // Create a new FormData object
+    const formDataToSend = new FormData();
+
+    // Adding data based on the current location
+    switch (location.pathname) {
       case "/categories": {
         formDataToSend.append("name_en", formData.name_en);
         formDataToSend.append("name_ru", formData.name_ru);
-        formDataToSend.append("images", formData.file);
-        break; // break qo'yish kerak
+        if (formData.file) formDataToSend.append("images", formData.file);
+        break;
       }
 
       case "/brands": {
-        formDataToSend.append("title", formData.name_en); // Russian (name_ru) kirish uchun variant qo'shishingiz mumkin
-        formDataToSend.append("images", formData.file);
-        break; // break qo'yish kerak
+        formDataToSend.append("title", formData.name_en);
+        if (formData.file) formDataToSend.append("images", formData.file);
+        break;
+      }
+
+      case "/locations": {
+        formDataToSend.append("name", formData.name_en);
+        formDataToSend.append("text", formData.name_ru);
+        if (formData.file) formDataToSend.append("images", formData.file);
+        break;
       }
 
       default:
         break;
     }
 
-    if (formData.file) formDataToSend.append("images", formData.file);
-
     try {
-      await axios.put(
-        `https://autoapi.dezinfeksiyatashkent.uz/api/categories/${editData.id}`,
+      // Make PUT request to update data
+      const response = await axios.put(
+        `https://autoapi.dezinfeksiyatashkent.uz/api${location.pathname}/${id}`,
         formDataToSend,
         {
           headers: {
@@ -60,9 +72,11 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
           },
         }
       );
+
+      // If the response is successful
       toast.success("Data updated successfully!");
-      getCategories();
-      closeEditModal();
+      getCategories(); // Refresh the category list after update
+      closeEditModal(); // Close the modal
     } catch (error) {
       console.error("Xatolik:", error);
       toast.error("Failed to update data. Please try again.");
@@ -75,7 +89,7 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
         <h2>Edit Data</h2>
         <form onSubmit={handleSubmit}>
           <label>
-       name
+            Name (English):
             <input
               type="text"
               name="name_en"
@@ -84,7 +98,8 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
               required
             />
           </label>
-          {location === "/categories" ? (
+
+          {location.pathname === "/categories" && (
             <label>
               Name (Russian):
               <input
@@ -95,7 +110,8 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
                 required
               />
             </label>
-          ) : location === "/brands" ? null : null}
+          )}
+
           <label>
             Upload File:
             <input
@@ -105,6 +121,7 @@ const EditModal = ({ editData, closeEditModal, getCategories }) => {
               accept="image/*"
             />
           </label>
+
           <div className="buttons">
             <button type="submit">Save</button>
             <button type="button" onClick={closeEditModal}>

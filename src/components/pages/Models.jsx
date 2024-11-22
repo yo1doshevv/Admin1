@@ -1,8 +1,12 @@
 import React from 'react'
+import Table from "../table/table.jsx"
+
 
 const Models = () => {
   return (
-    <div>Models</div>
+    <div className='models'>
+      <Table/>
+    </div>
   )
 }
 
