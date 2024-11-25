@@ -23,7 +23,6 @@ const Table = () => {
   const [cars, setCars] = useState([]);
   const locales = useLocation()?.pathname;
   const [id, setId] = useState()
-  // Get Categories
   const GetCategories = async () => {
     try {
       const response = await axios.get(
@@ -132,10 +131,9 @@ const Table = () => {
     setTimeout(() => {
       window.location.reload(); 
       <Loader/>
-    }, 5000); // 5000 millisekund, ya'ni 5 soniya
+    }, 5000);
   };
 
-  // Pagination Helper
   const paginateItems = (items, currentPage, itemsPerPage) => {
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -253,6 +251,7 @@ const Table = () => {
                       onClick={() => {
                         setModalType("edit");
                         setModal(true);
+                        setId(elem.id)
                       }}
                     ></Button>
                     <Button
@@ -288,7 +287,7 @@ const Table = () => {
                       startIcon={<EditIcon />}
                       onClick={() => {
                         setModalType("edit");
-                        setModal(id)
+                        setId(elem.id)
                         setModal(true);
                       }}
                     ></Button>
@@ -327,6 +326,7 @@ const Table = () => {
                       onClick={() => {
                         setModalType("edit");
                         setModal(true);
+                        setId(elem.id)
                       }}
                     ></Button>
                     <Button
